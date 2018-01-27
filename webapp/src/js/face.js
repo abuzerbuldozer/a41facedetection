@@ -1,6 +1,7 @@
 // Replace the subscriptionKey string value with your valid subscription
 // key.
-var subscriptionKey = "6e1974d183374f88810e9c8fcb83acd1";
+//yakarmurat@hotmail.com (27.01.2018)
+var subscriptionKey = "2c53eabb84d74455b04b870d67671383";
 var personGroupId = "a41_testgroup-2";
 var blobImage; //blob of image
 var faces; //all faces detected in image
