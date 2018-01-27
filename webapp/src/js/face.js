@@ -24,9 +24,7 @@ function detectFace(){
 	var canvas = document.getElementById('canvas');
 	bytesToSend = canvas.toDataURL('image/png');
 	blobImage = makeBlob(bytesToSend);
-	var faceDetectResponse = processBinaryImage(blobImage);
-
-	console.log(JSON.stringify(faceDetectResponse, null, 2));
+	processBinaryImage(blobImage);
 }
 
 

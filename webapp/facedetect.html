@@ -1,32 +1,33 @@
 <!doctype html>
 <html>
 <head>
-<title>FACE DETECTION DEMO</title>
-<meta charset='utf-8'>
-<link rel="shortcut icon" href="./src/images/common/favicon.ico">
-<link rel="icon" sizes="16x16 32x32 48x48"
-	href="./src/images/common/favicon.ico">
-<link rel="stylesheet" href="./src/css/main.css" type="text/css" media="all">
-<link rel="stylesheet" href="./src/css/loading.css" type="text/css"
-	media="all">
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous"></link>
-<script src="./src/js/imagetools.js" /></script>
-<script src="./src/js/capture.js" /></script>
-<script src="./src/js/face.js" /></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
-
-
+	<title>FACE DETECTION DEMO</title>
+	<meta charset='utf-8'>
+  <meta name="description" content="A41 Face Detection">
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+  <meta itemprop="description" content="All41Steeb Face Detection Application">
+  <meta name="mobile-web-app-capable" content="yes">
+	
+	
+	
+	<link rel="shortcut icon" href="./src/images/common/favicon.ico"/>
+	<link rel="icon" sizes="16x16 32x32 48x48"
+		href="./src/images/common/favicon.ico"/>
+	<link rel="stylesheet" href="./src/css/main.css" type="text/css" media="all"/>
+	<link rel="stylesheet" href="./src/css/loading.css" type="text/css" media="all"/>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		crossorigin="anonymous"></link>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -44,8 +45,8 @@
 						progress.</p>
 					<div class="row">
 						<div class="col-xs-4 ">
-							<video id="video"></video>
-							<button id="startbutton">DETECT</button>
+							<video id="video" autoplay playsinline></video>
+							<button id="startbutton" onClick="startDetection()">DETECT</button>
 
 							<canvas id="canvas"></canvas>
 							<img id="photo" alt="The screen capture will appear in this box.">
@@ -68,7 +69,6 @@
 				</div>
 				<div class="panel-body">
 					<div id="resultRow" class="row" style="display:none">
-						
 					
 					</div> <!-- resultRow -->
 					
@@ -76,7 +76,7 @@
 					
 					<div id="loadingBarRow" class="row">
 						<div class="col-xs-12">
-							<p>Detection results can be seen here...</p>
+							<p>Detection results can be seen here...</p>							
 						</div>
 					</div> <!-- loadingBarRow -->	
 					
@@ -92,6 +92,8 @@
 					<h1>Response History</h1>
 				</div>
 				<div class="panel-body">
+											<div id="errorMsg"></div>
+				
 					<div class="row">
 						<div class="col-xs-12">
 								<textarea id="responseTextArea" class="form-control" rows="10"></textarea>
@@ -103,10 +105,11 @@
 		</div>
 
 	</div>
-
-
-
-
-
+	
+	<script src="src/js/imagetools.js" /></script>
+	<script src="src/js/capture.js" /></script>
+	<script src="src/js/face.js" /></script>	
+  	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>	
+	
 </body>
 </html>
