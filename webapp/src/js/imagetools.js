@@ -2,6 +2,16 @@
  * 
  */
 
+var video = document.querySelector('video');
+canvas = document.getElementById('canvas');
+var width = 640;
+var height = 480;
+
+function startDetection(){
+	takepicture();
+	detectFace();
+}
+
 function makeBlob(dataURL) {
     var BASE64_MARKER = ';base64,';
     if (dataURL.indexOf(BASE64_MARKER) == -1) {
@@ -22,4 +32,44 @@ function makeBlob(dataURL) {
     }
 
     return new Blob([uInt8Array], { type: contentType });
+}
+
+
+
+//Fill the photo with an indication that none has been
+//captured.
+
+function clearphoto() {
+var context = canvas.getContext('2d');
+context.fillStyle = "#AAA";
+context.fillRect(0, 0, canvas.width, canvas.height);
+
+var data = canvas.toDataURL('image/png');
+photo.setAttribute('src', data);
+}
+
+//Capture a photo by fetching the current contents of the video
+//and drawing it into a canvas, then converting that to a PNG
+//format data URL. By drawing it on an offscreen canvas and then
+//drawing that to the screen, we can change its size and/or apply
+//other changes before drawing it.
+
+function takepicture() {
+var context = canvas.getContext('2d');
+if (width && height) {
+ canvas.width = width;
+ canvas.height = height;
+ context.drawImage(video, 0, 0, width, height);
+
+ var data = canvas.toDataURL('image/png');
+ photo.setAttribute('src', data);
+ $(".photo").show();
+ $(".photo").css('zIndex', 9999);
+ //$(".video").hide();
+ //$(".startbutton").hide();
+ video.pause();
+} else {
+ clearphoto();
+ alert('Can not take photo!');
+}
 }
