@@ -7,10 +7,13 @@ canvas = document.getElementById('canvas');
 var width = 640;
 var height = 480;
 
-function startDetection(){
+function startDetection(event){
+	clearForm();
 	takepicture();
 	detectFace();
 }
+
+
 
 function makeBlob(dataURL) {
     var BASE64_MARKER = ';base64,';
