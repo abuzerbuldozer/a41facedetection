@@ -11,12 +11,39 @@
 var errorElement = document.querySelector('#errorMsg');
 var video = document.querySelector('video');
 
+var isMobileDevice = !!(/Android|webOS|iPhone|iPad|iPod|BB10|BlackBerry|IEMobile|Opera Mini|Mobile|mobile/i.test(navigator.userAgent || ''));
 
 // Put variables in global scope to make them available to the browser console.
+var facingMode = "user";
 var constraints = window.constraints = {
   audio: false,
-  video: true
+  video: {
+	   facingMode: facingMode
+	  }
 };
+
+video.addEventListener('click', function() {
+
+	if(isMobileDevice){
+	
+	  if (facingMode == "user") {
+	    facingMode = "environment";
+	  } else {
+	    facingMode = "user";
+	  }
+
+	  constraints = {
+	    audio: false,
+	    video: {
+	      facingMode: facingMode
+	    }
+	  } 
+	 
+	  navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+	    video.srcObject = stream; 
+	  });
+	}
+	});
 
 function handleSuccess(stream) {
   var videoTracks = stream.getVideoTracks();
