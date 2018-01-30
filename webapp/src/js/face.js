@@ -7,6 +7,7 @@ var blobImage; //blob of image
 var faces; //all faces detected in image
 var bytesToSend; //binary data of image
 var userData = '{"name" : "", "age" : "", "email" : "", "lastDetectionDate" : "", "lastDetectionTime" : ""}';
+var newPerson = false;
 
 
 function detectFace(){
@@ -216,6 +217,7 @@ function createNewPerson(faceId){
 				// Show formatted JSON on webpage.
 				addFaceToPerson(data.personId, faceId);				
 				generateElements(data.personId, data.name, data.userData, faceId);
+				newPerson = true;
 			})	
 			
 			.fail(
@@ -454,7 +456,7 @@ function generateResponseResults(data, faces){
  * @returns
  */
 function generateElements(personId,name, userData, faceId){
-	
+	newPerson
 //	var img = $("<img id='img" + personId + "' class='img-thumbnail' width='150px' height='150px'></img>");
 	var canvas = $("<canvas id='newCanvas" + personId +  "' class='thumbnailCanvas' ></canvas>");
 	var img = drawThumbnail(canvas, faceId);
@@ -463,26 +465,38 @@ function generateElements(personId,name, userData, faceId){
 	
 	var rowid = 'row' + personId ;
 	
-	$('#resultRow').append("<div class='row' id='" + rowid  +  "'>");
 	
-	$("#" + rowid ).append("<div class='col-xs-4'>");
-		$( "#" + rowid ).find('div.col-xs-4').append( img );
-		$( "#" + rowid ).find('div.col-xs-4').append( canvas );
+	
+	
+	$('#resultRow').append("<div class='row' id='" + rowid  +  "' style='margin-left: 0px;'>");
+	
+	var txtMsg = newPerson ? "Hello stranger, can you give us some information about you?" : "Hello " + name + "!";	
+	$("#" + rowid ).append("<div class='row msgRow'>").append("<div class='col-xs-12 col-sm-3 col-lg-3>").append("<p>" + txtMsg + "</p>");
+	$("#" + rowid ).append("<div class='row dataRow'>");
+	
+	var dataRow = $( "#" + rowid ).find('div.dataRow');
+	dataRow.append("<div class='col-xs-4 col-sm-4 col-lg-3 thumbnailDiv'>");
+		dataRow.find('div.thumbnailDiv').append( img );
+		dataRow.find('div.thumbnailDiv').append( canvas );
 
-	$("#" + rowid ).append("<div class='col-xs-8'>");
-	$("#" + rowid ).find("div.col-xs-8").append("<form>");
-		$("#" + rowid ).find("form").append("<p>Hello stranger, can you give us some information about you?</p>");
-		$("#" + rowid ).find("form").append("<div class='form-group'>");
-		$("#" + rowid ).find("form").append("<div class='form-group'>");
-		$("#" + rowid ).find("form").append("<div class='form-group'>");
+	dataRow.append("<div  class='col-xs-6 col-sm-8 col-lg-9 dataDiv'>");
+	var dataDiv = dataRow.find("div.dataDiv")
+		dataDiv.append("<form class='form-horizontal'>");
+		var form = dataDiv.find("form");
+		form.append("<div class='form-group'>");
+		form.append("<div class='form-group'>");
+		form.append("<div class='form-group'>");
+		form.append("<div class='form-group'>");
 		
 		
-		$("#" + rowid ).find("div.form-group")[0].append( $('<label>', {
+		
+		var tmpFormElement = dataRow.find("div.form-group")[0];
+		tmpFormElement.append( $('<label>', {
 															        for:'name' + personId,
 															        text: 'Name:'
 															    }).get(0)
 															);			
-		$("#" + rowid ).find("div.form-group")[0].append( $('<input>', {
+		tmpFormElement.append( $('<input>', {
 															        type: 'text',
 																	id:'name' + personId,
 															        val: name,
@@ -490,12 +504,14 @@ function generateElements(personId,name, userData, faceId){
 															        class:'form-control my-form-control'
 															    }).get(0)
 															);
-		$("#" + rowid ).find("div.form-group")[0].append( $('<label>', {
+		
+		tmpFormElement = dataRow.find("div.form-group")[1];
+		tmpFormElement.append( $('<label>', {
 															        for:'surname' + personId,
 															        text: 'Surname:'
 															    }).get(0)
 															);	
-		$("#" + rowid ).find("div.form-group")[0].append( $('<input>', {
+		tmpFormElement.append( $('<input>', {
 															        type: 'text',
 																	id:'surname' + personId,
 															        val: (usrObj == null || !usrObj[0].surname) ? "" : usrObj[0].surname,
@@ -503,12 +519,14 @@ function generateElements(personId,name, userData, faceId){
 															        class:'form-control my-form-control'
 															    }).get(0)
 															);
-		$("#" + rowid ).find("div.form-group")[0].append( $('<label>', {
+		
+		tmpFormElement = dataRow.find("div.form-group")[2];
+		tmpFormElement.append( $('<label>', {
 															        for:'age' + personId,
 															        text: 'Age:'
 															    }).get(0)
 															);			
-		$("#" + rowid ).find("div.form-group")[0].append( $('<input>', {
+		tmpFormElement.append( $('<input>', {
 															        type: 'text',
 																	id:'age' + personId,
 															        val: (usrObj == null || !usrObj[1].age) ? "" : usrObj[1].age,
@@ -517,11 +535,19 @@ function generateElements(personId,name, userData, faceId){
 															    }).get(0)
 															);
 		
-		$("#" + rowid ).find("div.form-group")[0].append($('<button/>', {
+		
+		
+		tmpFormElement = dataRow.find("div.form-group")[3];
+		tmpFormElement.append( $('<label>', {
+	        text: ''
+	    }).get(0)
+	);			
+		tmpFormElement.append($('<button/>', {
 															        id: 'btn'+personId,
 															        click: function () { saveInfo( $(this), personId );return false; },
 																	text: 'Save Info',
-															        class:'btn btn-default'
+															        class:'btn btn-primary',
+															        style:'width:100%'
 															    }).get(0)
 															);
 //		<button type="button" class="btn btn-default">Default</button>
@@ -544,12 +570,13 @@ function drawThumbnail(canvasElement, faceId){
     var img 	= document.getElementById('photo'); //gets detection image
     var faceRectangle = findFaceRectangle(faceId); //find faceRectangle by given faceId
 	var size = (faceRectangle.width>faceRectangle.height) ? faceRectangle.width : faceRectangle.height; //turn faceRectangle to square
+
     canvas.width = size;
     canvas.height = size;
 
       
 	  var newImg = new Image;
-	  newImg.setAttribute('class','thumbnailImg');
+	  newImg.setAttribute('class','img-responsive thumbnailImg');
 	  newImg.onload = function() {
 		    context.drawImage(img,faceRectangle.left,faceRectangle.top,size,size,0,0,size,size);	
 	  };
