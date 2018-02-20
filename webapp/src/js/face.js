@@ -1,7 +1,14 @@
 // Replace the subscriptionKey string value with your valid subscription
 // key.
-//yakarmurat@hotmail.com (27.01.2018)
-var subscriptionKey = "2c53eabb84d74455b04b870d67671383";
+//gerayozkan@hotmail.com (Expire in 20.03.2018)
+
+//Key 1: ef2844ab9ac64fe6b49fbe8ae5bce822
+//Key 2: 5ea3f19f1f504401adbeb0fc42a2f653
+
+
+
+9:10 AM
+var subscriptionKey = "ef2844ab9ac64fe6b49fbe8ae5bce822";
 var personGroupId = "a41_testgroup-2";
 var blobImage; //blob of image
 var faces; //all faces detected in image
@@ -13,12 +20,14 @@ var newPerson = false;
 function detectFace(){
 	$(document).ajaxStart(function() {
 		  $(".loading-image").show();
+	      $("#startButton").prop('disabled', true);
 		  //$(".wrapper").show();
 		  $("#jsonOutput").hide();
 		});
 
 	$(document).ajaxStop(function() {
 	    $(".loading-image").hide();
+	    $("#startButton").prop('disabled', false);
 	    //$(".wrapper").fadeOut("slow");
 	    $("#jsonOutput").show();
 	});	
