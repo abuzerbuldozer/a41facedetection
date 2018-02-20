@@ -5,9 +5,6 @@
 //Key 1: ef2844ab9ac64fe6b49fbe8ae5bce822
 //Key 2: 5ea3f19f1f504401adbeb0fc42a2f653
 
-
-
-9:10 AM
 var subscriptionKey = "ef2844ab9ac64fe6b49fbe8ae5bce822";
 var personGroupId = "a41_testgroup-2";
 var blobImage; //blob of image
