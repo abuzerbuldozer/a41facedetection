@@ -98,7 +98,7 @@ function handleFaceDetectResults(data){
 	var obj = new Object();
 	obj.personGroupId = personGroupId;
 	obj.faceIds  = faceIds;
-	obj.maxNumOfCandidatesReturned = 1;
+	obj.maxNumOfCandidatesReturned = 5;
 	obj.confidenceThreshold = 0.5;
 	var jsonString= JSON.stringify(obj);
 	
@@ -564,10 +564,6 @@ function generateElementsOld(personId,name, userData, faceId){
 
 function generateElements(personId,name, userData, faceId){
 	
-//  var canvas = canvasElement.get(0);	
-//  var context = canvas.getContext('2d');
-//  context.drawImage(img,faceRectangle.left,faceRectangle.top,size,size,0,0,size,size);
-	
   var usrObj = (userData == null) ? null : JSON.parse(userData);
 	
   var view = {
@@ -579,12 +575,7 @@ function generateElements(personId,name, userData, faceId){
     message : "",
     vfaceid : faceId
   };
-//
-//  $("#templates").load("../../template.html #resultTemp",function(){
-//    var template = document.getElementById('resultTemp').innerHTML;
-//    var output = Mustache.render(template, view);
-//    $("#resultRow").html(output);
-//  });
+
   var txtMsg = newPerson ? "Hello stranger, can you give us some information about you?" : "Hello " + name + "!";
   view.message = txtMsg;
   $.get('template.htm', function(templates) {
@@ -596,9 +587,7 @@ function generateElements(personId,name, userData, faceId){
 	    $('#resultRow').show();
 	    
 		var canvas = $('#canvas' + view.rowid );
-		var img = $('#thumbnail' + view.rowid );
-		var tmpimg = drawThumbnail(canvas, view.vfaceid);
-		img.src = tmpimg.src;
+		drawThumbnail(canvas, view.vfaceid);
 	});
 	
 
