@@ -1,0 +1,37 @@
+
+<script id="tpl-resultrow" type="text/html">
+    <div id="row{{rowid}}" class="box">
+		<form>
+    	<h3 class="title is-4 is-spaced">{{message}}</h3>
+    	<div class="columns">
+    		<div id="imgdiv{{rowid}}" class="column is-2">
+    			<img id='thumbnail{{rowid}}' class="circle" src="{{imgsrc}}" >
+				<canvas id='canvas{{rowid}}' class='circle' ></canvas>
+    		</div>
+    		<div class="column is-6">
+    			<div class="field">
+			  		<label class="label" for="name{{rowid}}">Name</label>
+			  		<div class="control">
+			    		<input id="name{{rowid}}" name="name" class="input" type="text" placeholder="Text input" value="{{name}}">
+			  		</div>
+
+			  		<label class="label mTop" for="surname{{rowid}}" >Surname</label>
+			  		<div class="control">
+			    		<input id="surname{{rowid}}" name="surname"  class="input" type="text" placeholder="Text input" value="{{surname}}">
+			  		</div>
+				</div>
+    		</div>
+    		<div class="column is-4">
+    			<label class="label" for="age{{rowid}}" >Age</label>
+		  		<div class="control">
+		    		<input id="age{{rowid}}" name="age" class="input" type="text" placeholder="Text input" value="{{age}}">
+		  		</div>
+
+		  		<div class="control">
+		  			<a id="btn{{rowid}}" class="button is-success saveButton" onClick="saveInfo( $(this), '{{rowid}}' );return false;">SAVE</a>
+			  	</div>
+    		</div>
+    	</div>
+		</form>
+    </div>
+ </script>
