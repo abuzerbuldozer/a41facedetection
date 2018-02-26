@@ -1,101 +1,57 @@
 #videoDiv {
-  width:330px;
-  padding-left:0px;
-}
-
-#video {
-  border: 1px solid black;
-  box-shadow: 2px 2px 3px black;
-  width:320px;
-  height:240px;
+  width: 100%;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
   position: relative;
-  top: 0;
-  left: 0; 
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 96%);
+  z-index: -2;
 }
 
-#photo {
-  border: 1px solid black;
-  box-shadow: 2px 2px 3px black;
-  width:320px;
-  height:240px;
+.fit{
+  object-fit: cover;
+}
+
+.fill{
+  width: 100%;
+  height: 100%;
   position: absolute;
-  top:0;
-  left: 0px;
-  z-index:-1;
-  float:left;
+  top: 0;
+  left: 0;
 }
 
-#canvas {
-  display:none;
+.allowWebcam{
+  padding-bottom: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
 }
 
-.thumbnailCanvas {
-  width:100%;
-  height:100%;
-  position:relative;
+.buttonContainer{
+  width: 100%;
+  padding-top: 20px;
 }
 
-.thumbnailImg {
-  width:40px;
-  height:30px;
-  position:absolute;
-  float:left;
+.halfButton{
+  width: 50%;
 }
 
-.camera {
-  width: 340px;
-  display:inline-block;
+.logTitle{
+  padding-top: 20px;
 }
 
-.output {
-  width: 340px;
-  display:inline-block;
+.circle{
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
 }
 
-#startbuttonff {
-  display:block;
-  position:relative;
-  margin-left:auto;
-  margin-right:auto;
-  bottom:60px;
-  left:100px;
-  background-color: rgba(0, 150, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
-  font-size: 14px;
-  font-family: "Lucida Grande", "Arial", sans-serif;
-/*   color: rgba(255, 255, 255, 1.0); */
+.mTop{
+  margin-top: 15px;
 }
 
-.contentarea {
-  font-size: 16px;
-  font-family: "Lucida Grande", "Arial", sans-serif;
-  width: 760px;
+.saveButton{
+  margin-top: 47px;
+  width: 100%;
 }
-
-
-
-
-.form-group {
-    margin-bottom: 2px;
-    display:flex;
-}
-
-.my-form-control {
-    height: 30px !important;
-    font-size: 12px !important;
-}
-
-label {
-	font-size: 10px;
-	float: left;
-	width:100px;
-}
-
-.form-horizontal .form-group {
-margin-bottom:3px;}
-
-.btn-space {
-    margin-right: 5px;
-}
-

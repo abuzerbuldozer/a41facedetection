@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<title>FACE DETECTION DEMO</title>
+<title>FACE DETECTION</title>
 <meta charset='utf-8'>
 <meta name="description" content="A41 Face Detection">
 <meta name="viewport"
@@ -11,123 +11,75 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	
 
 <link rel="shortcut icon" href="./src/images/common/favicon.ico" />
 <link rel="icon" sizes="16x16 32x32 48x48"
 	href="./src/images/common/favicon.ico" />
+<link rel="stylesheet" href="./src/css/bulma.css" type="text/css"
+	media="all" />
 <link rel="stylesheet" href="./src/css/main.css" type="text/css"
 	media="all" />
-<link rel="stylesheet" href="./src/css/loading.css" type="text/css"
-	media="all" />
+<!--<link rel="stylesheet" href="./src/css/loading.css" type="text/css"
+	media="all" />-->
+<script type="text/javascript" src="./src/js/mustache.js" ></script>
+<script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous"></link>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
 </head>
 <body>
-
-	<div class="container-fluid">
-
-		<div class="panel-group" >
-
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h1>Face Detection</h1>
-					<p>Press 'Detect' button on the video section to start
-						progress.</p>
-				</div>
-				<div class="panel-body">
-
-					<div class="row" style="margin-left:0px">
-						<div id="videoDiv" class="col-xs-9 col-sm-6 col-lg-4">
-							<div class="row">
-								<video id="video" autoplay playsinline></video>
-								<canvas id="canvas"></canvas>
-								<img id="photo" alt="The screen capture will appear in this box.">
-							</div>
-							
-						<div class="row btn-group"  >
-								<div class="col-xs-4" style="display: flex;padding-left:0px">
-									<button id="startbutton" class="btn btn-primary btn-space"
-										onClick="startDetection()">DETECT</button>
-									<button type="button" class="btn" onclick="clearForm()">Restart
-										Progress</button>
-								</div>
-							</div>							
-							
-						</div>
-						<!-- videoDiv -->
-
-						<div class="col-xs-12 col-sm-6 col-lg-8">
-
-							<div  class="row" style="margin-left: -30px;">
-								<div id="resultRow"  style="display: none;margin-left:-15px" class="col-xs-12 col-sm-12 col-lg-12">
-								</div>
-							</div>
-							<!-- resultRow -->
-							
-							<div id="loadingBarRow" class="row" >
-								<div class="col-xs-12 col-sm-12 col-lg-12"  style="margin-left: -15px;">
-									<p style="margin-left: -15px;" >Detection results can be seen here...</p>
-								</div>
-							</div>
-							<!-- loadingBarRow -->
-
-						</div>
-
-
-
-
-
-
-
-					</div>
-					
+	<div id="errorMsg"></div>
+	<div class="container">
 	
+		<section class="hero">
+			  <div class="hero-body">
+				    <div class="container">
+				      	<h1 class="title">
+				        	Face Detection
+				      	</h1>
+				      	<h2 class="subtitle">
+				        	press the <strong>DETECT</strong> button to start
+				      	</h2>
+				    </div>
+			  </div>
+		</section>
+
+		<div class="columns">
+			<!-- WEBCAM -->
+			<div class="column is-one-third">
+				<div id="videoDiv" class="is-light">
+				    <video id="video" autoplay playsinline class="fill fit"></video>
+					<canvas id="canvas" class="fill fit"></canvas>
+					<img id="photo" class="fill fit">
+					<div class="has-text-centered allowWebcam has-text-grey is-size-6">allow webcam access to use this app</div>
 				</div>
+
+				<!-- BUTTONS -->
+				<div class="buttonContainer buttons has-addons has-text-centered">
+					<a onClick="startDetection()" id="startbutton" class="button is-success is-large halfButton">DETECT</a>
+					<a onclick="clearForm()" class="button is-danger is-large halfButton">RESTART</a>
+				</div>
+
 			</div>
 
-
-
-		</div>
-		<!-- panel-body -->
-	</div>
-	<!-- panel panel-default -->
-
-
-
-
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h1>Response History</h1>
-		</div>
-		<div class="panel-body">
-			<div id="errorMsg"></div>
-
-			<div class="row">
-				<div class="col-xs-12">
-					<textarea id="responseTextArea" class="form-control" rows="10"></textarea>
-				</div>
-				<!-- col-xs-12 -->
+			<!-- FORM -->
+			<div class="column" id="resultRow">
 			</div>
-			<!-- row -->
+		
+
+		<hr style="margin-bottom: 0;">
+
+	</div>
+	
+	
+		<div class="columns">
+			<div class="column">
+				<h3 class="title is-4 is-spaced logTitle">Log</h3>
+				<textarea id="responseTextArea" class="textarea" placeholder="..." rows="10"></textarea>
+			</div>
 		</div>
-	</div>
-
-	</div>
-
-	</div>
+</div>
 
 	<script src="src/js/imagetools.js" /></script>
 	<script src="src/js/capture.js" /></script>

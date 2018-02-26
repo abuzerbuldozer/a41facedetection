@@ -66,8 +66,10 @@ if (width && height) {
 
  var data = canvas.toDataURL('image/png');
  photo.setAttribute('src', data);
- $(".photo").show();
- $(".photo").css('zIndex', 9999);
+ $("#photo").show();
+ $("#photo").css('zIndex', 9999);
+ $("#video").css('zIndex', -9999);
+
  //$(".video").hide();
  //$(".startbutton").hide();
  video.pause();

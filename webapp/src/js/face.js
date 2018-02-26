@@ -437,15 +437,17 @@ function handleCandidateData(data, faceId){
  * @returns
  */
 function clearForm(){
-	$("#resultRow").empty();
+	$('#resultRow').empty();
 	$("#resultRow").hide();
-	
-	$("#responseTextArea").val("");
-	$("#loadingBarRow").show();	
-	var video = document.getElementById('video');
-	var photo = document.getElementById('video');
-
+	$("#responseTextArea").val('');
 	video.play();
+	 $("#photo").hide();
+	 $("#photo").css('zIndex', -9999);
+	 $("#video").css('zIndex', 9999);
+
+	console.log('clearForm : completed');
+
+	
 }
 
 
@@ -461,7 +463,7 @@ function generateResponseResults(data, faces){
  * @param faceId
  * @returns
  */
-function generateElements(personId,name, userData, faceId){
+function generateElementsOld(personId,name, userData, faceId){
 	newPerson
 //	var img = $("<img id='img" + personId + "' class='img-thumbnail' width='150px' height='150px'></img>");
 	var canvas = $("<canvas id='newCanvas" + personId +  "' class='thumbnailCanvas' ></canvas>");
@@ -556,10 +558,54 @@ function generateElements(personId,name, userData, faceId){
 															        style:'width:100%'
 															    }).get(0)
 															);
-//		<button type="button" class="btn btn-default">Default</button>
 
 	displayResults();
 }
+
+function generateElements(personId,name, userData, faceId){
+	
+//  var canvas = canvasElement.get(0);	
+//  var context = canvas.getContext('2d');
+//  context.drawImage(img,faceRectangle.left,faceRectangle.top,size,size,0,0,size,size);
+	
+  var usrObj = (userData == null) ? null : JSON.parse(userData);
+	
+  var view = {
+	rowid : personId,
+    name : name,
+    surname : (usrObj == null || !usrObj[0].surname) ? "" : usrObj[0].surname,
+    age : (usrObj == null || !usrObj[1].age) ? "" : usrObj[1].age,
+    imgsrc : "https://bulma.io/images/placeholders/128x128.png",
+    message : "",
+    vfaceid : faceId
+  };
+//
+//  $("#templates").load("../../template.html #resultTemp",function(){
+//    var template = document.getElementById('resultTemp').innerHTML;
+//    var output = Mustache.render(template, view);
+//    $("#resultRow").html(output);
+//  });
+  var txtMsg = newPerson ? "Hello stranger, can you give us some information about you?" : "Hello " + name + "!";
+  view.message = txtMsg;
+  $.get('template.htm', function(templates) {
+	    // Fetch the <script /> block from the loaded external
+	    // template file which contains our greetings template.
+	    var template = $(templates).filter('#tpl-resultrow').html();
+	    var output = Mustache.render(template, view);
+	    $('#resultRow').html(output);
+	    $('#resultRow').show();
+	    
+		var canvas = $('#canvas' + view.rowid );
+		var img = $('#thumbnail' + view.rowid );
+		var tmpimg = drawThumbnail(canvas, view.vfaceid);
+		img.src = tmpimg.src;
+	});
+	
+
+	
+}
+
+
 
 /**
  * draws thumbnail image for the given faceId
@@ -582,7 +628,7 @@ function drawThumbnail(canvasElement, faceId){
 
       
 	  var newImg = new Image;
-	  newImg.setAttribute('class','img-responsive thumbnailImg');
+	  newImg.setAttribute('class','circle');
 	  newImg.onload = function() {
 		    context.drawImage(img,faceRectangle.left,faceRectangle.top,size,size,0,0,size,size);	
 	  };
@@ -642,27 +688,27 @@ function updatePerson(personId,formData){
 	obj.name = "";
 	obj.userData = new Array();
 	
-//	 obj.toJSON = function(key)  
-//	 {  
-//	    var replacement = new Object();  
-//	    for (var val in this)  
-//	    {  
-//	    	console.log(val);
-//	        if (typeof (this[val]) === 'string') { 
-//	            replacement[val] = this[val].replace(/["]/g, '\\"'); 
-//	        }
-//	        else if (  Array.isArray(this[val]) ) {
-//	        	var tmp = this[val];
-//	        	for( var i=0;i<tmp.length;i++ ){
-//	        		tmp[i] = tmp[i].replace(/["]/g, '\\"'); 
-//	        	}
-//	    	}
-//	        else {
-//	            replacement[val] = this[val]  
-//	        }
-//	    }  
-//	    return replacement;  
-//	};	
+	 obj.toJSON = function(key)  
+	 {  
+	    var replacement = new Object();  
+	    for (var val in this)  
+	    {  
+	    	console.log(val);
+	        if (typeof (this[val]) === 'string') { 
+	            replacement[val] = this[val].replace(/["]/g, '\\"'); 
+	        }
+	        else if (  Array.isArray(this[val]) ) {
+	        	var tmp = this[val];
+	        	for( var i=0;i<tmp.length;i++ ){
+	        		tmp[i].value = tmp[i].value.replace(/["]/g, '\\"'); 
+	        	}
+	    	}
+	        else {
+	            replacement[val] = this[val]  
+	        }
+	    }  
+	    return replacement;  
+	};	
 	
 	var str = "";
 	var name = "";
@@ -686,7 +732,7 @@ function updatePerson(personId,formData){
 			obj.userData.push(tmpobj);
 		}
 	}
-	obj.userData.push({"name":"lastDetectionDate","value":getDateStr()});
+//	obj.userData.push({"name":"lastDetectionDate","value":getDateStr()});
 
 	
 	str = '{' + name + ',userData :' + userData + '}';

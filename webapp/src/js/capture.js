@@ -15,12 +15,20 @@ var isMobileDevice = !!(/Android|webOS|iPhone|iPad|iPod|BB10|BlackBerry|IEMobile
 
 // Put variables in global scope to make them available to the browser console.
 var facingMode = "user";
-var constraints = window.constraints = {
+var constraints = {
   audio: false,
   video: {
 	   facingMode: facingMode
-	  }
+	  },
+  width:320,
+  height:240
 };
+
+
+//$( window ).on( "orientationchange", function( event ) {
+//	  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
+//	  alert(event.orientation);
+//});
 
 video.addEventListener('click', function() {
 
@@ -31,19 +39,18 @@ video.addEventListener('click', function() {
 	  } else {
 	    facingMode = "user";
 	  }
+//	  alert( facingMode );
+	  constraints.video.facingMode = facingMode;
+	  startVideo();
 
-	  constraints = {
-	    audio: false,
-	    video: {
-	      facingMode: facingMode
-	    }
-	  } 
-	 
-	  navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-	    video.srcObject = stream; 
-	  });
 	}
 	});
+
+function startVideo(constraints){
+	  navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+		    video.srcObject = stream; 
+	  });
+}
 
 function handleSuccess(stream) {
   var videoTracks = stream.getVideoTracks();
