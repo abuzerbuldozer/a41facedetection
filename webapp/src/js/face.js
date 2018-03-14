@@ -573,8 +573,42 @@ function generateElements(personId,name, userData, faceId){
     age : (usrObj == null || !usrObj[1].age) ? "" : usrObj[1].age,
     imgsrc : "https://bulma.io/images/placeholders/128x128.png",
     message : "",
-    vfaceid : faceId
+    vfaceid : faceId,
+    gender : "",
+    visualage : "0",
+    moustache : "no",
+    beard : "no",
+    eyemakeup : "No",
+    lipmakeup : "No",
+    emotionKey : "Neutrall",
+    emotionScore : "0",
+    bald : ""
   };
+  
+  
+	for(var i=0;i<faces.length;i++){
+		var tempFace = faces[i];
+		if( tempFace.faceId == faceId ){
+			  view.gender = tempFace.faceAttributes.gender == "male" ? "Male" : "Female";
+			  view.visualage = tempFace.faceAttributes.age;
+			  view.moustache = "%" + (tempFace.faceAttributes.facialHair.moustache * 100); 
+			  view.beard = "%" + (tempFace.faceAttributes.facialHair.beard*100);
+			  view.eyemakeup = tempFace.faceAttributes.makeup.eyeMakeup == "false" ? "No" : "Yes";
+			  view.lipmakeup = tempFace.faceAttributes.makeup.lipMakeup == "false" ? "No" : "Yes";;
+			  var emotions = faces[i].faceAttributes.emotion;
+			  for (var key in emotions) {
+				    if (emotions.hasOwnProperty(key)) {
+				        console.log(key + " -> " + emotions[key]);
+				        if( view.emotionScore < emotions[key] ){
+				        	view.emotionScore = emotions[key];
+				        	view.emotionKey = key;
+				        }
+				    }
+				}
+	          view.emotionScore = "%" + (view.emotionScore*100);
+			  view.bald = "%" + (tempFace.faceAttributes.hair.bald*100);
+		}
+	}  
 
   var txtMsg = newPerson ? "Hello stranger, can you give us some information about you?" : "Hello " + name + "!";
   view.message = txtMsg;

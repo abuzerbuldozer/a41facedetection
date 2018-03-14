@@ -31,6 +31,48 @@
 			  	</div>
     		</div>
     	</div>
+		<div class="columns">
+    		<div class="column is-12">
+				<h3 class="title is-4 is-spaced logTitle">Face Detection Results</h3>
+			</div>
+		</div>
+		<div class="columns">
+    		<div class="column is-12">
+				<div class="columns">
+					<div class="column is-2" style="text-align:  left;">
+						<b>Gender : </b>{{gender}}</div>
+					<div class="column is-3" style="text-align: left;">
+						<b>Moustache : </b>{{moustache}}</div>
+					<div class="column is-4" style="text-align:  left;">
+						<b>Eye Makeup : </b>{{eyemakeup}}
+					</div>	
+					<div class="column is-3" style="text-align:  left;">
+						<b>Lip Makeup : </b>{{lipmakeup}}
+					</div>
+	
+				</div>
+			</div>
+		</div>
+
+
+		<div class="columns">
+    		<div class="column is-12">
+				<div class="columns">
+					<div class="column is-2" style="text-align: left;">
+						<b>Age : </b>{{visualage}}</div>
+					<div class="column is-3" style="text-align: left;">
+						<b>Beard : </b>{{beard}}
+					</div>
+					<div class="column is-4" style="text-align:  left;">
+						<b>Emotion : </b>{{emotionScore}}  {{emotionKey}}
+					</div>	
+					<div class="column is-3" style="text-align:  left;">
+						<b>Is Bald : </b>{{bald}}
+					</div>				
+				</div>
+			</div>
+		</div>
+
 		</form>
     </div>
  </script>
