@@ -5,8 +5,11 @@
 //Key 1: ef2844ab9ac64fe6b49fbe8ae5bce822
 //Key 2: 5ea3f19f1f504401adbeb0fc42a2f653
 
-var subscriptionKey = "ef2844ab9ac64fe6b49fbe8ae5bce822";
-var personGroupId = "a41_testgroup-2";
+//var subscriptionKey = "ef2844ab9ac64fe6b49fbe8ae5bce822";   //free
+var subscriptionKey = "18983658cddb41f6a4694b653b1320ca";   //all41subscription
+var apiurl = "https://westeurope.api.cognitive.microsoft.com/face/v1.0";
+
+var personGroupId = "a41innolab";
 var blobImage; //blob of image
 var faces; //all faces detected in image
 var bytesToSend; //binary data of image
@@ -36,7 +39,7 @@ function detectFace(){
 
 
 function processBinaryImage(blobImage) {
-	var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect";
+	var uriBase = apiurl + "/detect";
 
 	// Request parameters.
 	var params = {
@@ -102,7 +105,7 @@ function handleFaceDetectResults(data){
 	obj.confidenceThreshold = 0.5;
 	var jsonString= JSON.stringify(obj);
 	
-	var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/identify";
+	var uriBase = apiurl + "/identify";
 	
 	// Perform the REST API call.
 	$
@@ -189,7 +192,7 @@ function createNewPerson(faceId){
 	var jsonString= JSON.stringify(obj);
 	
 	
-	var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/" + personGroupId + "/persons";
+	var uriBase = apiurl + "/persongroups/" + personGroupId + "/persons";
 	// Perform the REST API call.
 	$
 			.ajax(
@@ -272,7 +275,7 @@ function addFaceToPerson(personId, faceId){
 //    }
 	var targetFace = generateTargetFace(faceId);
 	
-	var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/" + personGroupId + 
+	var uriBase = apiurl + "/persongroups/" + personGroupId + 
 					"/persons/" + personId + "/persistedFaces?targetFace=" + targetFace;
 	
 	
@@ -323,7 +326,7 @@ function addFaceToPerson(personId, faceId){
 function trainPersonGroup(data){
 	
 
-	var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/" + personGroupId + "/train";
+	var uriBase = apiurl + "/persongroups/" + personGroupId + "/train";
 	
 	
 	// Perform the REST API call.
@@ -377,7 +380,7 @@ function handleCandidateData(data, faceId){
 	var confidence = data.confidence;
 	var personId = data.personId;
 	
-	var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/" + personGroupId + "/persons/" + personId;
+	var uriBase = apiurl + "/persongroups/" + personGroupId + "/persons/" + personId;
 	
 	
 	// Perform the REST API call.
@@ -767,7 +770,7 @@ function updatePerson(personId,formData){
 	var jsonString = str;
 	
 	
-	var uriBase = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/" + personGroupId + "/persons/" + personId;
+	var uriBase = apiurl + "/persongroups/" + personGroupId + "/persons/" + personId;
 	// Perform the REST API call.
 	$
 			.ajax(
