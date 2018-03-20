@@ -18,8 +18,12 @@ var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
 var webkit = !!ua.match(/WebKit/i);
 var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
 
-if( !iOSSafari ){
+if( isMobileDevice && !iOSSafari ){
 	showDialogMessage( "ERROR !", "This webpage can be displayed only in SAFARI browser.",true );
+}
+
+if(isMobileDevice && (window.innerHeight > window.innerWidth) ){
+	  showDialogMessage( "ERROR !", "You need to use landscape mode.\nPlease change the orientation of your device.", true );
 }
 
 // Put variables in global scope to make them available to the browser console.
