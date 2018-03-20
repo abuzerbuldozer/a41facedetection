@@ -18,7 +18,7 @@ var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
 var webkit = !!ua.match(/WebKit/i);
 var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
 
-if( iOSSafari ){
+if( !iOSSafari ){
 	showDialogMessage( "ERROR !", "This webpage can be displayed only in SAFARI browser.",true );
 }
 
