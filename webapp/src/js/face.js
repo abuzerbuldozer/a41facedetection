@@ -85,7 +85,7 @@ function processBinaryImage(blobImage) {
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 //						alert(errorString);
-						showDialogMessage("HATA!",errorString. false);
+						showDialogMessage("ERROR!",errorString. false);
 					});
 	
 		return;
@@ -153,7 +153,7 @@ function handleFaceDetectResults(data){
 						}
 						else{
 //							alert(errorString);
-							showDialogMessage("HATA!",errorString, false);
+							showDialogMessage("ERROR!",errorString, false);
 
 							console.error( "Unexpected error : " + errorString);
 						}
@@ -242,7 +242,7 @@ function createNewPerson(faceId){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString, false);
+						showDialogMessage("ERROR!",errorString, false);
 
 						
 					});		
@@ -324,7 +324,7 @@ function addFaceToPerson(personId, faceId){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString, false);
+						showDialogMessage("ERROR!",errorString, false);
 
 					});		
 		
@@ -368,7 +368,7 @@ function trainPersonGroup(data){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString, false);
+						showDialogMessage("ERROR!",errorString, false);
 
 					});	
 	
@@ -439,7 +439,7 @@ function handleCandidateData(data, faceId){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString,false);
+						showDialogMessage("ERROR!",errorString,false);
 
 					});	
 
@@ -581,28 +581,30 @@ function generateElements(personId,name, userData, faceId){
 	
   var usrObj = (userData == null) ? null : JSON.parse(userData);
 	
-  var view = {
-	rowid : personId,
-    name : name,
-    surname : (usrObj == null || !usrObj[0].surname) ? "" : usrObj[0].surname,
-    age : (usrObj == null || !usrObj[1].age) ? "" : usrObj[1].age,
-    imgsrc : "https://bulma.io/images/placeholders/128x128.png",
-    message : "",
-    vfaceid : faceId,
-    gender : "",
-    visualage : "0",
-    moustache : "no",
-    beard : "no",
-    eyemakeup : "No",
-    lipmakeup : "No",
-    emotionKey : "Neutrall",
-    emotionScore : "0",
-    bald : ""
-  };
+
   
   
 	for(var i=0;i<faces.length;i++){
 		var tempFace = faces[i];
+		  var view = {
+					rowid : personId,
+				    name : name,
+				    surname : (usrObj == null || !usrObj[0].surname) ? "" : usrObj[0].surname,
+				    age : (usrObj == null || !usrObj[1].age) ? "" : usrObj[1].age,
+				    imgsrc : "https://bulma.io/images/placeholders/128x128.png",
+				    message : "",
+				    vfaceid : faceId,
+				    gender : "",
+				    visualage : "0",
+				    moustache : "no",
+				    beard : "no",
+				    eyemakeup : "No",
+				    lipmakeup : "No",
+				    emotionKey : "Neutrall",
+				    emotionScore : "0",
+				    bald : ""
+				  };
+		  
 		if( tempFace.faceId == faceId ){
 			  view.gender = tempFace.faceAttributes.gender == "male" ? "Male" : "Female";
 			  view.visualage = tempFace.faceAttributes.age;
@@ -622,23 +624,27 @@ function generateElements(personId,name, userData, faceId){
 				}
 	          view.emotionScore = "%" + (view.emotionScore*100);
 			  view.bald = "%" + (tempFace.faceAttributes.hair.bald*100);
+			  
+			  
+			  var txtMsg = newPerson ? "Hello stranger, can you give us some information about you?" : "Hello " + name + "!";
+			  view.message = txtMsg;
+			  $.get('template.htm', function(templates) {
+				    // Fetch the <script /> block from the loaded external
+				    // template file which contains our greetings template.
+				    var template = $(templates).filter('#tpl-resultrow').html();
+				    var output = Mustache.render(template, view);
+				    $('#resultRow').append(output);
+				    
+					var canvas = $('#canvas' + view.rowid );
+					drawThumbnail(canvas, view.vfaceid);
+				}); 
 		}
 	}  
 
-  var txtMsg = newPerson ? "Hello stranger, can you give us some information about you?" : "Hello " + name + "!";
-  view.message = txtMsg;
-  $.get('template.htm', function(templates) {
-	    // Fetch the <script /> block from the loaded external
-	    // template file which contains our greetings template.
-	    var template = $(templates).filter('#tpl-resultrow').html();
-	    var output = Mustache.render(template, view);
-	    $('#resultRow').html(output);
-	    $('#resultRow').show();
-	    
-		var canvas = $('#canvas' + view.rowid );
-		drawThumbnail(canvas, view.vfaceid);
-	});  
+ 
 	
+  	$('#resultRow').show();
+
 }
 
 
@@ -832,7 +838,7 @@ function updatePerson(personId,formData){
 						}	
 						else{
 							//alert(errorString);
-							showDialogMessage("HATA!",errorString, false);
+							showDialogMessage("ERROR!",errorString, false);
 
 						}
 					});		
