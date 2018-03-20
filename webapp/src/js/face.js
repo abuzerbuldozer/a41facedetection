@@ -16,8 +16,8 @@ var bytesToSend; //binary data of image
 var userData = '{"name" : "", "age" : "", "email" : "", "lastDetectionDate" : "", "lastDetectionTime" : ""}';
 var newPerson = false;
 
-
 function detectFace(){
+	
 	$(document).ajaxStart(function() {
 		  $(".loading-image").show();
 	      $("#startButton").prop('disabled', true);
@@ -84,7 +84,8 @@ function processBinaryImage(blobImage) {
 								: (jQuery.parseJSON(jqXHR.responseText).message) ? jQuery
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
-						alert(errorString);
+//						alert(errorString);
+						showDialogMessage("HATA!",errorString);
 					});
 	
 		return;
@@ -151,7 +152,9 @@ function handleFaceDetectResults(data){
 							}
 						}
 						else{
-							alert(errorString);
+//							alert(errorString);
+							showDialogMessage("HATA!",errorString);
+
 							console.error( "Unexpected error : " + errorString);
 						}
 					});	
@@ -238,7 +241,10 @@ function createNewPerson(faceId){
 								: (jQuery.parseJSON(jqXHR.responseText).message) ? jQuery
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
-						alert(errorString);
+						//alert(errorString);
+						showDialogMessage("HATA!",errorString);
+
+						
 					});		
 	
 	
@@ -317,7 +323,9 @@ function addFaceToPerson(personId, faceId){
 								: (jQuery.parseJSON(jqXHR.responseText).message) ? jQuery
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
-						alert(errorString);
+						//alert(errorString);
+						showDialogMessage("HATA!",errorString);
+
 					});		
 		
 	
@@ -359,7 +367,9 @@ function trainPersonGroup(data){
 								: (jQuery.parseJSON(jqXHR.responseText).message) ? jQuery
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
-						alert(errorString);
+						//alert(errorString);
+						showDialogMessage("HATA!",errorString);
+
 					});	
 	
 }
@@ -428,7 +438,9 @@ function handleCandidateData(data, faceId){
 								: (jQuery.parseJSON(jqXHR.responseText).message) ? jQuery
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
-						alert(errorString);
+						//alert(errorString);
+						showDialogMessage("HATA!",errorString);
+
 					});	
 
 }
@@ -625,9 +637,7 @@ function generateElements(personId,name, userData, faceId){
 	    
 		var canvas = $('#canvas' + view.rowid );
 		drawThumbnail(canvas, view.vfaceid);
-	});
-	
-
+	});  
 	
 }
 
@@ -821,7 +831,9 @@ function updatePerson(personId,formData){
 							console.warn( "Expected error : PersonGroup " + personGroupId + " do not contain any person.No need to train,");
 						}	
 						else{
-							alert(errorString);
+							//alert(errorString);
+							showDialogMessage("HATA!",errorString);
+
 						}
 					});		
 	
@@ -857,6 +869,18 @@ return string
 .replace(/[\f]/g, "\\f");
 }
 
+function showDialogMessage( type, text ){
+	
+	  $(".modal .modaltitle").html ( type );
+	  $(".modal .modalmsg").html ( text );  
+	  $(".modal").addClass("is-active");  
+
+	
+}
+
+function hideDialogMessage( ){
+$(".modal").removeClass("is-active");
+}
 // replacer handler for JSON stringify
 function stringifyReplacer(key, value)
 {
@@ -866,3 +890,6 @@ return escapeSpecialCharacters(value);
 
 return value;
 }
+
+
+
