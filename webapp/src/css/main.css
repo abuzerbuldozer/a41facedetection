@@ -55,3 +55,17 @@
   margin-top: 47px;
   width: 100%;
 }
+
+.modaltitle{
+    color: white;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+
+.modalmsg{
+    color: white;
+    font-weight: normal;
+    font-size: x-large;
+}
+    
