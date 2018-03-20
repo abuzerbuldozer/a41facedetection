@@ -85,7 +85,7 @@ function processBinaryImage(blobImage) {
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 //						alert(errorString);
-						showDialogMessage("HATA!",errorString);
+						showDialogMessage("HATA!",errorString. false);
 					});
 	
 		return;
@@ -153,7 +153,7 @@ function handleFaceDetectResults(data){
 						}
 						else{
 //							alert(errorString);
-							showDialogMessage("HATA!",errorString);
+							showDialogMessage("HATA!",errorString, false);
 
 							console.error( "Unexpected error : " + errorString);
 						}
@@ -242,7 +242,7 @@ function createNewPerson(faceId){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString);
+						showDialogMessage("HATA!",errorString, false);
 
 						
 					});		
@@ -324,7 +324,7 @@ function addFaceToPerson(personId, faceId){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString);
+						showDialogMessage("HATA!",errorString, false);
 
 					});		
 		
@@ -368,7 +368,7 @@ function trainPersonGroup(data){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString);
+						showDialogMessage("HATA!",errorString, false);
 
 					});	
 	
@@ -439,7 +439,7 @@ function handleCandidateData(data, faceId){
 										.parseJSON(jqXHR.responseText).message
 										: jQuery.parseJSON(jqXHR.responseText).error.message;
 						//alert(errorString);
-						showDialogMessage("HATA!",errorString);
+						showDialogMessage("HATA!",errorString,false);
 
 					});	
 
@@ -832,7 +832,7 @@ function updatePerson(personId,formData){
 						}	
 						else{
 							//alert(errorString);
-							showDialogMessage("HATA!",errorString);
+							showDialogMessage("HATA!",errorString, false);
 
 						}
 					});		
@@ -869,11 +869,19 @@ return string
 .replace(/[\f]/g, "\\f");
 }
 
-function showDialogMessage( type, text ){
+function showDialogMessage( type, text, isBlockPage ){
 	
 	  $(".modal .modaltitle").html ( type );
 	  $(".modal .modalmsg").html ( text );  
-	  $(".modal").addClass("is-active");  
+	  $(".modal").addClass("is-active"); 
+	  if( isBlockPage ){
+		  $(".modal .button").hide();
+		  $(".modal .modal-close").hide();
+	  }
+	  else{
+		  $(".modal .button").show();
+		  $(".modal .modal-close").show();
+	  }
 
 	
 }

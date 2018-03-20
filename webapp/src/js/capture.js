@@ -13,6 +13,15 @@ var video = document.querySelector('video');
 
 var isMobileDevice = !!(/Android|webOS|iPhone|iPad|iPod|BB10|BlackBerry|IEMobile|Opera Mini|Mobile|mobile/i.test(navigator.userAgent || ''));
 
+var ua = window.navigator.userAgent;
+var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+var webkit = !!ua.match(/WebKit/i);
+var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+
+if( iOSSafari ){
+	showDialogMessage( "ERROR !", "This webpage can be displayed only in SAFARI browser.",true );
+}
+
 // Put variables in global scope to make them available to the browser console.
 var facingMode = "user";
 var constraints = {
@@ -25,10 +34,15 @@ var constraints = {
 };
 
 
-//$( window ).on( "orientationchange", function( event ) {
-//	  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
-//	  alert(event.orientation);
-//});
+$( window ).on( "orientationchange", function( event ) {
+	  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
+	  if( isMobileDevice && event.orientation == "portrait" ){
+		  showDialogMessage( "ERROR !", "You need to use landscape mode.\nPlease change the orientation of your device.", true );
+	  }
+	  if(event.orientation == "landscape" ){
+		  hideDialogMessage();
+	  }
+});
 
 video.addEventListener('click', function() {
 
