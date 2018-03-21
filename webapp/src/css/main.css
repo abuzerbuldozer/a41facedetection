@@ -68,4 +68,25 @@
     font-weight: normal;
     font-size: x-large;
 }
+
+@media only screen and (min-device-width: 480px) 
+                   and (max-device-width: 776px) 
+                   and (orientation: landscape) {
+
+	#videoDiv{
+		width: 60%;
+		height:auto;
+		padding-top: 30%;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.hero-body{
+		padding: 1rem 1.5rem;
+	}
+	.buttonContainer{
+		padding-top: 5px;
+	}
+
+}
+
     
