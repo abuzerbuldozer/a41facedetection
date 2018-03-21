@@ -1,0 +1,33 @@
+{
+    "@metadata": {
+        "authors": [
+          "Me"
+        ],
+        "last-updated": "2016-09-21",
+        "locale": "de",
+        "message-documentation": "qqq"
+    },
+    "appname-title": "Gesichtserkennung",
+    "appname-sub-title": "Dr\u00fccke die <strong>DETECT-Taste</strong> um zu starten",
+    "button-detect" : "ERKENNEN",
+    "button-restart" : "NEUSTART",
+    "inform-name" : "Vorname",
+    "inform-surname" : "Nachname",
+    "inform-age" : "Alter",
+    "button-save" : "SPEICHERN",
+    "inform-header" : "Ergebnisse der Gesichtserkennung",
+    "inform-gender" : "Geschlecht :",
+    "inform-moustache" : "Schnurrbart :",
+    "inform-eyemakeup" : "Augen Makeup :",
+    "inform-lipmakeup" : "Lippen Make-up :",
+    "inform-visualage" : "Alter :",
+    "inform-beard" : "Bart :",
+    "inform-emotion" : "Emotion :",
+    "inform-isbald" : "Ist Kahl :",
+    "inform-greetingtostranger" : "Hallo Fremder, kannst du uns ein paar Informationen über dich geben?",  
+    "inform-wellcome" : "Hallo $1! ",
+    "error-mobillandscape" : "Sie müssen den Querformat-Modus verwenden. \nBitte ändern Sie die Ausrichtung Ihres Gerätes." ,
+    "error-mobilsafari" : "Diese Webseite kann nur im SAFARI-Browser angezeigt werden.",
+    "msgtype-error" : "FEHLER", 
+    "msgtype-warning" : "WARNUNG"   
+}

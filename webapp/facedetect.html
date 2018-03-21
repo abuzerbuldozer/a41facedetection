@@ -13,19 +13,30 @@
 
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	
+<!-- 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
 
 <link rel="shortcut icon" href="./src/images/common/favicon.ico" />
-<link rel="icon" sizes="16x16 32x32 48x48"
-	href="./src/images/common/favicon.ico" />
-<link rel="stylesheet" href="./src/css/bulma.css" type="text/css"
-	media="all" />
-<link rel="stylesheet" href="./src/css/main.css" type="text/css"
-	media="all" />
+<link rel="icon" sizes="16x16 32x32 48x48" href="./src/images/common/favicon.ico" />
+<link rel="stylesheet" href="./src/css/bulma.css" type="text/css" media="all" />
+<link rel="stylesheet" href="./src/css/main.css" type="text/css" media="all" />
 <!--<link rel="stylesheet" href="./src/css/loading.css" type="text/css"
 	media="all" />-->
 <script type="text/javascript" src="./src/js/mustache.js" ></script>
 <script src="//code.jquery.com/mobile/1.5.0-alpha.1/jquery.mobile-1.5.0-alpha.1.min.js"></script>
+
+<!--  <script src="./src/js/lib/CLDRPluralRuleParser/CLDRPluralRuleParser.js"></script> -->
+ <script src="./src/js/lib/jquery.i18n/jquery.i18n.js"></script>
+ <script src="./src/js/lib/jquery.i18n/jquery.i18n.messagestore.js"></script>
+ <script src="./src/js/lib/jquery.i18n/jquery.i18n.fallbacks.js"></script>
+ <script src="./src/js/lib/jquery.i18n/jquery.i18n.language.js"></script>
+ <script src="./src/js/lib/jquery.i18n/jquery.i18n.parser.js"></script>
+ <script src="./src/js/lib/jquery.i18n/jquery.i18n.emitter.js"></script>
+ <script src="./src/js/lib/jquery.i18n/jquery.i18n.emitter.bidi.js"></script>
+<!-- 
+  <script src="./src/js/lib/history/jquery.history.js"></script>
+  <script src="./src/js/lib/url/url.min.js"></script>
+    -->
+    <script src="./src/js/global.js"></script>
 
 </head>
 <body>
@@ -35,10 +46,15 @@
 		<section class="hero">
 			  <div class="hero-body">
 				    <div class="container">
-				      	<h1 class="title">
-				        	Face Detection
+				    
+<!-- 				        <ul class="switch-locale"> -->
+<!-- 					      <li><a href="#" data-locale="en">English</a></li> -->
+<!-- 					      <li><a href="#" data-locale="ru">Deutsch</a></li> -->
+<!-- 					    </ul> -->
+				      	<h1 class="title" data-i18n="appname-title">
+				        	Face Detection (Fallback text)
 				      	</h1>
-				      	<h2 class="subtitle">
+				      	<h2 class="subtitle" data-i18n="[html]appname-sub-title">
 				        	press the <strong>DETECT</strong> button to start
 				      	</h2>
 				    </div>
@@ -57,8 +73,8 @@
 
 				<!-- BUTTONS -->
 				<div class="buttonContainer buttons has-addons has-text-centered">
-					<a onClick="startDetection()" id="startbutton" class="button is-success is-large halfButton">DETECT</a>
-					<a onclick="clearForm()" class="button is-danger is-large halfButton">RESTART</a>
+					<a onClick="startDetection()" id="startbutton" class="button is-success is-large halfButton" data-i18n="button-detect">DETECT</a>
+					<a onclick="clearForm()" class="button is-danger is-large halfButton" data-i18n="button-restart">RESTART</a>
 				</div>
 
 			</div>

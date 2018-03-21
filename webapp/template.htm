@@ -9,46 +9,47 @@
     		</div>
     		<div class="column is-6">
     			<div class="field">
-			  		<label class="label" for="name{{rowid}}">Name</label>
+			  		<label class="label" for="name{{rowid}}" data-i18n="inform-name">Name</label>
 			  		<div class="control">
 			    		<input id="name{{rowid}}" name="name" class="input" type="text" placeholder="Text input" value="{{name}}">
 			  		</div>
 
-			  		<label class="label mTop" for="surname{{rowid}}" >Surname</label>
+			  		<label class="label mTop" for="surname{{rowid}}" data-i18n="inform-surname">Surname</label>
 			  		<div class="control">
 			    		<input id="surname{{rowid}}" name="surname"  class="input" type="text" placeholder="Text input" value="{{surname}}">
 			  		</div>
 				</div>
     		</div>
     		<div class="column is-4">
-    			<label class="label" for="age{{rowid}}" >Age</label>
+    			<label class="label" for="age{{rowid}}" data-i18n="inform-age">Age</label>
 		  		<div class="control">
 		    		<input id="age{{rowid}}" name="age" class="input" type="text" placeholder="Text input" value="{{age}}">
 		  		</div>
 
 		  		<div class="control">
-		  			<a id="btn{{rowid}}" class="button is-success saveButton" onClick="saveInfo( $(this), '{{rowid}}' );return false;">SAVE</a>
+		  			<a id="btn{{rowid}}" class="button is-success saveButton" onClick="saveInfo( $(this), '{{rowid}}' );return false;" data-i18n="button-save">SAVE</a>
 			  	</div>
     		</div>
     	</div>
 		<div class="columns">
     		<div class="column is-12">
-				<h3 class="title is-4 is-spaced logTitle">Face Detection Results</h3>
+				<h3 class="title is-4 is-spaced logTitle" data-i18n="inform-header">Face Detection Results</h3>
 			</div>
 		</div>
 		<div class="columns">
     		<div class="column is-12">
 				<div class="columns">
-					<div class="column is-2" style="text-align:  left;">
-						<b>Gender : </b>{{gender}}</div>
-					<div class="column is-3" style="text-align: left;">
-						<b>Moustache : </b>{{moustache}}</div>
-					<div class="column is-4" style="text-align:  left;">
-						<b>Eye Makeup : </b>{{eyemakeup}}
-					</div>	
 					<div class="column is-3" style="text-align:  left;">
-						<b>Lip Makeup : </b>{{lipmakeup}}
+						<b data-i18n="inform-gender">Gender : </b>{{gender}}</div>
+					<div class="column is-3" style="text-align: left;">
+						<b data-i18n="inform-moustache">Moustache : </b>{{moustache}}
 					</div>
+					<div class="column is-3" style="text-align:  left;">
+						<b data-i18n="inform-emotion">Emotion : </b>{{emotionScore}}  {{emotionKey}}
+					</div>
+					<div class="column is-4" style="text-align:  left;">
+						<b data-i18n="inform-eyemakeup">Eye Makeup : </b>{{eyemakeup}}
+					</div>	
 	
 				</div>
 			</div>
@@ -58,17 +59,18 @@
 		<div class="columns">
     		<div class="column is-12">
 				<div class="columns">
-					<div class="column is-2" style="text-align: left;">
-						<b>Age : </b>{{visualage}}</div>
 					<div class="column is-3" style="text-align: left;">
-						<b>Beard : </b>{{beard}}
+						<b data-i18n="inform-visualage">Age : </b>{{visualage}}</div>
+					<div class="column is-3" style="text-align: left;">
+						<b data-i18n="inform-beard">Beard : </b>{{beard}}
 					</div>
-					<div class="column is-4" style="text-align:  left;">
-						<b>Emotion : </b>{{emotionScore}}  {{emotionKey}}
-					</div>	
+	
 					<div class="column is-3" style="text-align:  left;">
-						<b>Is Bald : </b>{{bald}}
-					</div>				
+						<b data-i18n="inform-isbald">Is Bald : </b>{{bald}}
+					</div>	
+					<div class="column is-4" style="text-align:  left;">
+						<b data-i18n="inform-lipmakeup">Lip Makeup : </b>{{lipmakeup}}
+					</div>			
 				</div>
 			</div>
 		</div>

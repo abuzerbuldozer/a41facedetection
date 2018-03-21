@@ -1,0 +1,33 @@
+{
+    "@metadata": {
+        "authors": [
+          "Me"
+        ],
+        "last-updated": "2016-09-21",
+        "locale": "de",
+        "message-documentation": "qqq"
+    },
+    "appname-title": "Face Detection",
+    "appname-sub-title": "press the <strong>DETECT</strong> button to start",
+    "button-detect" : "DETECT",
+    "button-restart" : "RESTART",
+    "inform-name" : "Name",
+    "inform-surname" : "Surname",
+    "inform-age" : "Age",
+    "button-save" : "SAVE",
+    "inform-header" : "Face Detection Results",
+    "inform-gender" : "Gender :",
+    "inform-moustache" : "Moustache :",
+    "inform-eyemakeup" : "Eye Makeup :",
+    "inform-lipmakeup" : "Lip Makeup :",
+    "inform-visualage" : "Age :",
+    "inform-beard" : "Beard :",
+    "inform-emotion" : "Emotion :",
+    "inform-isbald" : "Is Bald :",
+    "inform-greetingtostranger" : "Hello stranger, can you give us some information about you?",  
+    "inform-wellcome" : "Hello $1! ",
+    "error-mobillandscape" : "You need to use landscape mode.\nPlease change the orientation of your device." ,
+    "error-mobilsafari" : "This webpage can be displayed only in SAFARI browser." ,
+    "msgtype-error" : "ERROR", 
+    "msgtype-warning" : "WARNING"
+}
