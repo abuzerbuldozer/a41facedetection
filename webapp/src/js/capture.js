@@ -34,8 +34,8 @@ var constraints = {
   video: {
 	   facingMode: facingMode
 	  },
-  width:320,
-  height:240
+  width:640,
+  height:640
 };
 
 /*
