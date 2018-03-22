@@ -4,8 +4,8 @@
 
 var video = document.querySelector('video');
 canvas = document.getElementById('canvas');
-var width = 640;
-var height = 480;
+//var width = 640;
+//var height = 480;
 
 function startDetection(event){
 	clearForm();
@@ -59,10 +59,10 @@ photo.setAttribute('src', data);
 
 function takepicture() {
 var context = canvas.getContext('2d');
-if (width && height) {
- canvas.width = width;
- canvas.height = height;
- context.drawImage(video, 0, 0, width, height);
+if (canvas && canvas.width && canvas.height) {
+ canvas.width = constraints.width;
+ canvas.height = constraints.height;
+ context.drawImage(video, 0, 0,constraints.width,constraints.height);
 
  var data = canvas.toDataURL('image/png');
  photo.setAttribute('src', data);
