@@ -4,8 +4,8 @@
 
 var video = document.querySelector('video');
 canvas = document.getElementById('canvas');
-//var width = 640;
-//var height = 480;
+var width = 640;
+var height = 0;
 
 function startDetection(event){
 	clearForm();
@@ -59,15 +59,14 @@ photo.setAttribute('src', data);
 
 function takepicture() {
 var context = canvas.getContext('2d');
-if (canvas && canvas.width && canvas.height) {
- canvas.width = constraints.width;
- canvas.height = constraints.height;
- context.drawImage(video, 0, 0,constraints.width,constraints.height);
+if (canvas && canvas.width) {
+ canvas.width = width;
+ canvas.height = height;
+ context.drawImage(video, 0, 0, width,height);
 
  var data = canvas.toDataURL('image/png');
  photo.setAttribute('src', data);
- var txt = "canvas.width:" + canvas.width  + "\ncanvas.height:" + canvas.height + "\nimgwidht:" + $("#photo").width() + "\nimgheight:" + $("#photo").height();
- alert( txt );
+// var txt = "canvas.width:" + canvas.width  + "\ncanvas.height:" + canvas.height + "\nimgwidht:" + $("#photo").width() + "\nimgheight:" + $("#photo").height();
  $("#photo").show();
  $("#photo").css('zIndex', 9999);
  $("#video").css('zIndex', -9999);
