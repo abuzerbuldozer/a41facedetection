@@ -18,14 +18,15 @@ var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
 var webkit = !!ua.match(/WebKit/i);
 var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
 
-if( isMobileDevice && !iOSSafari ){
+
+if( !(isMobileDevice && !iOSSafari) ){
 	showDialogMessage( $.i18n('msgtype-error'), $.i18n('error-mobilsafari') ,true );
 }
-
+/*
 if(isMobileDevice && (window.innerHeight > window.innerWidth) ){
 	  showDialogMessage( $.i18n('msgtype-error'), $.i18n('error-mobillandscape'), true );
 }
-
+*/
 // Put variables in global scope to make them available to the browser console.
 var facingMode = "user";
 var constraints = {
@@ -37,7 +38,7 @@ var constraints = {
   height:240
 };
 
-
+/*
 $( window ).on( "orientationchange", function( event ) {
 	  $( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
 	  if( isMobileDevice && event.orientation == "portrait" ){
@@ -47,6 +48,7 @@ $( window ).on( "orientationchange", function( event ) {
 		  hideDialogMessage();
 	  }
 });
+*/
 
 video.addEventListener('click', function() {
 
