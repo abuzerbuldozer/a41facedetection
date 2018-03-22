@@ -67,7 +67,7 @@ if (canvas && canvas.width && canvas.height) {
  var data = canvas.toDataURL('image/png');
  photo.setAttribute('src', data);
  var txt = "canvas.width:" + canvas.width  + "\ncanvas.height:" + canvas.height + "\nimgwidht:" + $("#photo").width() + "\nimgheight:" + $("#photo").height();
- alert(  )
+ alert( txt );
  $("#photo").show();
  $("#photo").css('zIndex', 9999);
  $("#video").css('zIndex', -9999);
