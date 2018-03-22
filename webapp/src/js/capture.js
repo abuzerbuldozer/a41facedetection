@@ -18,11 +18,11 @@ var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
 var webkit = !!ua.match(/WebKit/i);
 var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
 
-
+/*
 if( !(isMobileDevice && !iOSSafari) ){
 	showDialogMessage( $.i18n('msgtype-error'), $.i18n('error-mobilsafari') ,true );
 }
-/*
+
 if(isMobileDevice && (window.innerHeight > window.innerWidth) ){
 	  showDialogMessage( $.i18n('msgtype-error'), $.i18n('error-mobillandscape'), true );
 }
