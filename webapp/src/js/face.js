@@ -1,11 +1,3 @@
-// Replace the subscriptionKey string value with your valid subscription
-// key.
-//gerayozkan@hotmail.com (Expire in 20.03.2018)
-
-//Key 1: ef2844ab9ac64fe6b49fbe8ae5bce822
-//Key 2: 5ea3f19f1f504401adbeb0fc42a2f653
-
-//var subscriptionKey = "ef2844ab9ac64fe6b49fbe8ae5bce822";   //free
 var subscriptionKey = "18983658cddb41f6a4694b653b1320ca";   //all41subscription
 var apiurl = "https://westeurope.api.cognitive.microsoft.com/face/v1.0";
 
@@ -228,9 +220,9 @@ function createNewPerson(faceId){
 			
 			.success(function(data) {
 				// Show formatted JSON on webpage.
+				newPerson = true;
 				addFaceToPerson(data.personId, faceId);				
 				generateElements(data.personId, data.name, data.userData, faceId);
-				newPerson = true;
 			})	
 			
 			.fail(
@@ -480,7 +472,7 @@ function generateResponseResults(data, faces){
  * @returns
  */
 function generateElementsOld(personId,name, userData, faceId){
-	newPerson
+	
 //	var img = $("<img id='img" + personId + "' class='img-thumbnail' width='150px' height='150px'></img>");
 	var canvas = $("<canvas id='newCanvas" + personId +  "' class='thumbnailCanvas' ></canvas>");
 	var img = drawThumbnail(canvas, faceId);
@@ -670,8 +662,9 @@ function drawThumbnail(canvasElement, faceId){
 
     canvas.width = size;
     canvas.height = size;
-
-      
+    context.drawImage(img,faceRectangle.left,faceRectangle.top,size,size,0,0,size,size);	
+    return;
+      /*
 	  var newImg = new Image;
 	  newImg.setAttribute('class','circle');
 	  newImg.onload = function() {
@@ -679,7 +672,7 @@ function drawThumbnail(canvasElement, faceId){
 	  };
 	  newImg.src = canvas.toDataURL('image/png');  
 	  
-	  return newImg;
+	  return newImg;*/
 
 }
 
