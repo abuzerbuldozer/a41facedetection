@@ -18,9 +18,9 @@
     	  var webkit = !!ua.match(/WebKit/i);
     	  var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
     	  
-    	  if( !(isMobileDevice && !iOSSafari) ){
-    			showDialogMessage( $.i18n('msgtype-error'), $.i18n('error-mobilsafari') ,true );
-    		}
+//    	  if( !(isMobileDevice && !iOSSafari) ){
+//    			showDialogMessage( $.i18n('msgtype-error'), $.i18n('error-mobilsafari') ,true );
+//    		}
 //        set_locale_to(url('?locale'));
 // 
 //        History.Adapter.bind(window, 'statechange', function(){
