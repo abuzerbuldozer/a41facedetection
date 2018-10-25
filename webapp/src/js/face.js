@@ -297,8 +297,8 @@ function addFaceToPerson(personId, faceId){
 
 						// Request body.
 							data : blobImage,
-							processData : false
-//							success : trainPersonGroup
+							processData : false,
+							success : trainPersonGroup
 					})
 
 			.done(function(data) {
@@ -324,6 +324,79 @@ function addFaceToPerson(personId, faceId){
 	
 }
 
+
+//https://westeurope.api.cognitive.microsoft.com/face/v1.0/persongroups/a41innolab/training
+function isPersonGroupReady(){
+	var me = this;
+	var result = "";
+
+	var uriBase = apiurl + "/persongroups/" + personGroupId + "/training";
+	
+	
+	// Perform the REST API call.
+	$
+			.ajax(
+					{
+						url : uriBase,
+
+						// Request headers.
+						beforeSend : function(xhrObj) {
+							xhrObj.setRequestHeader(
+									"Ocp-Apim-Subscription-Key",
+									subscriptionKey);
+						},
+						type : "GET",
+						async: false
+					})
+
+			.done(function(data) {
+				// Show formatted JSON on webpage.
+				var newVal = $("#responseTextArea").val() + "\n ********* TRAIN STATUS ******** \n" +JSON.stringify(data, null, 2) + "\n************************** \n";
+				$("#responseTextArea").val( newVal );
+			})
+			.success(function(data) {
+				//Training status: notstarted, running, succeeded, failed. 
+				//If the training process is waiting to perform, the status is notstarted. 
+				//If the training is ongoing, the status is running. Status succeed means this person group is ready for 
+				//   Face - Identify. Status failed is often caused by no person or no persisted face exist in the person group.
+				result = data;
+			})		
+			.fail(
+					function(jqXHR, textStatus, errorThrown) {
+						// Display error message.
+						var errorString = (errorThrown === "") ? "Error. "
+								: errorThrown + " (" + jqXHR.status + "): ";
+						errorString += (jqXHR.responseText === "") ? ""
+								: (jQuery.parseJSON(jqXHR.responseText).message) ? jQuery
+										.parseJSON(jqXHR.responseText).message
+										: jQuery.parseJSON(jqXHR.responseText).error.message;
+						//alert(errorString);
+						showDialogMessage("ERROR!",errorString, false);
+
+					});	
+	
+	
+//	 "createdDateTime": "12/21/2017 12:57:27",
+//	    "lastActionDateTime": "12/21/2017 12:57:30",
+	    var createdDateTimeStr = date.createdDateTime;
+	    var lastActionDateTimeStr = date.lastActionDateTime;
+	    var statusStr = date.status;
+	
+	    var createdDateTime = new Date(createdDateTimeStr);
+	    var lastActionDateTime = new Date(lastActionDateTimeStr);
+	    
+	    	if( statusStr !== "succeeded" && lastActionDateTime.getTime() <= createdDateTime.getTime()){
+	    		return true;
+	    	}
+	    	else if( statusStr === "succeeded" && lastActionDateTime.getTime() > createdDateTime.getTime() ){
+				return true;
+			}
+	    	
+			return false;
+	
+}
+	
+	
 function trainPersonGroup(data){
 	
 
